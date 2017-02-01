@@ -23,7 +23,9 @@ Fulfill the below user stories. Use whichever libraries or APIs you need. Give i
 
 - [ ] User Story: I can win the game by getting a series of 20 steps correct. I am notified of my victory, then the game starts over.
 
-Hint: Here are mp3s you can use for each button: https://s3.amazonaws.com/freecodecamp/simonSound1.mp3, https://s3.amazonaws.com/freecodecamp/simonSound2.mp3, https://s3.amazonaws.com/freecodecamp/simonSound3.mp3, https://s3.amazonaws.com/freecodecamp/simonSound4.mp3.
+Hint: Here are mp3s you can use for each button:
+
+https://s3.amazonaws.com/freecodecamp/simonSound1.mp3, https://s3.amazonaws.com/freecodecamp/simonSound2.mp3, https://s3.amazonaws.com/freecodecamp/simonSound3.mp3, https://s3.amazonaws.com/freecodecamp/simonSound4.mp3.
 
 Remember to use Read-Search-Ask if you get stuck.
 
