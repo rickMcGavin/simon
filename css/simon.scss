@@ -2,6 +2,9 @@
 /*----------------------------*\
   1. MAIN SETUP
 \*----------------------------*/
+$led-light-on: #DC0D29;
+$led-light-off: #32050C;
+
 @import url('https://fonts.googleapis.com/css?family=Alfa+Slab+One|VT323');
 
 body {
@@ -15,6 +18,13 @@ body {
   height: 100vh;
 }
 
+
+
+
+
+/*----------------------------*\
+  2. GAME
+\*----------------------------*/
 .game {
   background: #333;
   border-radius: 100%;
@@ -78,6 +88,13 @@ body {
   left: 236px;
 }
 
+
+
+
+
+/*----------------------------*\
+  3. CONTROLS
+\*----------------------------*/
 .middle {
   border: 12px solid #333;
   text-align: center;
@@ -93,17 +110,98 @@ body {
 
 .middle h1 {
   font-family: 'Alfa Slab One', cursive;
+  font-size: 3em;
+  margin-bottom: 0;
+}
+
+
+.led-row {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.led-light {
+  height: 6px;
+  width: 6px;
+  background: $led-light-off;
+  border: 2px solid #222;
+  border-radius: 100%;
+  margin-right: 11.5%;
+  margin-bottom: 1%;
+}
+
+.row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-around;
 }
 
 .display {
-  background: #32050C;
+  display: inline-block;
+  background: $led-light-off;
   border: 4px solid #222;
   border-radius: 10px;
   color: #430710;
   font-family: 'VT323', monospace;
   font-size: 2em;
-  position: relative;
-  margin-left: 15px;
   height: 30px;
   width: 60px;
+}
+
+.btn {
+  background: #FC0102;
+  border: 4px solid #333;
+  border-radius: 100%;
+  box-shadow: 0px 2px 3px #222;
+  cursor: pointer;
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+}
+
+.btn:last-child {
+  background: yellow;
+}
+
+.row span,
+.switch-row {
+  font-family: Arial;
+  font-size: .75em;
+}
+
+.row span:first-child {
+  margin-left: 18px;
+}
+
+.row span:nth-child(2) {
+  margin-left: 20px;
+}
+
+.switch-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  height: 40px;
+}
+
+.switch-row span {
+  margin: 2%;
+}
+
+.slot {
+  background: #222;
+  border-radius: 2px;
+  display: flex;
+  margin-top: 10%;
+  width: 40px;
+  height: 20px;
+}
+
+.switch {
+  background: #3193DE;
+  border: 1px solid #222;
+  border-radius: 4px;
+  cursor: pointer;
+  height: 18px;
+  width: 18px;
 }
