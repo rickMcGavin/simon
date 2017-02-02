@@ -19,3 +19,11 @@ powerSwitch.addEventListener("click", function() {
     powerOn = false;
   }
 });
+
+startButton.addEventListener("mousedown", function() {
+  startButton.style.boxShadow = "0px 0px 0px #222";
+});
+
+startButton.addEventListener("mouseup", function() {
+  startButton.style.boxShadow = "0px 2px 3px #222";
+})
