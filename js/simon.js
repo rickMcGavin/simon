@@ -7,22 +7,22 @@ var startButton = document.querySelector(".start");
 var display = document.querySelector(".display");
 
 // green button
-var greenButton = document.getElementById("0");
+var greenButton = document.querySelector("[id='0']");
 var greenLightOn = "#13FF7C";
 var greenLightOff = "#00A74A";
 
 // red button
-var redButton = document.getElementById("1");
+var redButton = document.querySelector("[id='1']");
 var redButtonOn = "#FF4C4C";
 var redButtonOff = "#9F0F17";
 
 // yellow button
-var yellowButton = document.getElementById("2");
+var yellowButton = document.querySelector("[id='2']");
 var yellowButtonOn = "#FED938";
 var yellowButtonOff = "#CCA707";
 
 // blue button
-var blueButton = document.getElementById("3");
+var blueButton = document.querySelector("[id='3']");
 var blueButtonOn = "#1C8CFF";
 var blueButtonOff = "#094A8F";
 
@@ -38,31 +38,41 @@ function updateDisplay(count) {
   count <= 9 ? display.textContent = "0" + count : display.textContent = count;
 }
 
+function moveLooper(count) {
+  setTimeout(function() {
+    if (count <= computerMoves.length) {
+      lightUpButton(computerMoves[count]);
+      count++;
+      moveLooper(count);
+    }
+  }, 750);
+}
+
 function lightUpButton(color) {
   switch(color) {
     case "green":
         greenButton.style.background = greenLightOn;
-      setInterval(function() {
-        greenButton.style.background = greenLightOff;
-      }, 1000);
+        setTimeout(function() {
+          greenButton.style.background = greenLightOff;
+        }, 500);
       break;
     case "red":
         redButton.style.background = redButtonOn;
-      setInterval(function() {
-        redButton.style.background = redButtonOff;
-      }, 1000);
+        setTimeout(function() {
+          redButton.style.background = redButtonOff;
+        }, 500);
       break;
     case "yellow":
         yellowButton.style.background = yellowButtonOn;
-      setInterval(function() {
-        yellowButton.style.background = yellowButtonOff;
-      }, 1000);
+        setTimeout(function() {
+          yellowButton.style.background = yellowButtonOff;
+        }, 500);
       break;
     case "blue":
         blueButton.style.background = blueButtonOn;
-      setInterval(function() {
+        setTimeout(function() {
         blueButton.style.background = blueButtonOff;
-      }, 1000);
+      }, 500);
       break;
   }
 }
@@ -88,28 +98,33 @@ function computerMove() {
   var randomNum = getRandomNumber();
   updateDisplay(computerMoves.length + 1);
   pushComputerMoveToArray(randomNum);
-  computerMoves.forEach(function(color) {
-    setInterval(function(){
-      lightUpButton(color);
-    }, 1000);
-  })
+  moveLooper(0);
   playerMove();
   console.log(computerMoves);
 }
 
-function playerMove() {
-  greenButton.addEventListener("click", function() {
+function makeButtonsClickable() {
+  greenButton.classList.add("clickable");
+  redButton.classList.add("clickable");
+  yellowButton.classList.add("clickable");
+  blueButton.classList.add("clickable");
+}
 
+function playerMove() {
+  makeButtonsClickable();
+  greenButton.addEventListener("click", function() {
+    playerMoves.push("green");
   });
   redButton.addEventListener("click", function() {
-
+    playerMoves.push("red");
   });
   yellowButton.addEventListener("click", function() {
-
+    playerMoves.push("yellow");
   });
-  blueButton.addEventListener("click", function() {
-
+  blueButton.addEventListener("mousedown", function() {
+    playerMoves.push("blue");
   });
+  console.log(playerMoves);
 }
 
 powerSwitch.addEventListener("click", function() {
@@ -120,6 +135,7 @@ powerSwitch.addEventListener("click", function() {
   } else {
     display.style.color = "#430710";
     switchSlot.style.justifyContent = "flex-start";
+    display.innerText = "--"
     powerOn = false;
   }
 });
@@ -139,11 +155,13 @@ strictButton.addEventListener("mousedown", function() {
 
 strictButton.addEventListener("mouseup", function() {
   strictButton.style.boxShadow = "0px 2px 3px #222";
-  if (strictLight.classList.contains("led-off")) {
-    strictLight.classList.remove("led-off");
-    strictLight.classList.add("led-on");
-  } else {
-    strictLight.classList.remove("led-on");
-    strictLight.classList.add("led-off");
+  if (powerOn) {
+    if (strictLight.classList.contains("led-off")) {
+      strictLight.classList.remove("led-off");
+      strictLight.classList.add("led-on");
+    } else {
+      strictLight.classList.remove("led-on");
+      strictLight.classList.add("led-off");
+    }
   }
 });
