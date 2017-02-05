@@ -110,7 +110,7 @@ function computerMove() {
   pushComputerMoveToArray(randomNum);
   moveLooper(0);
   makeButtonsClickable();
-  // playerMove();
+  playerMove();
   console.log(computerMoves);
 }
 
@@ -181,16 +181,18 @@ function checkIfMoveMatches(move) {
 
 }
 
-  function playerMoveHandler(color) {
-    lightUpButton(color);
-    playerMoves.push(color);
-    checkIfMoveMatches();
-    console.log(playerMoves);
-}
 
-for (var i = 0; i < gameButtons.length; i++) {
-  gameButtons[i].addEventListener("click", function() {
-    console.log(this);
-    playerMoveHandler(this.id)
-  });
+function playerMove() {
+  function playerMoveHandler() {
+    lightUpButton(this.id);
+    playerMoves.push(this.id);
+    // checkIfMoveMatches();
+    console.log(playerMoves);
+    for (var i = 0; i < gameButtons.length; i++) {
+      gameButtons[i].removeEventListener("click", playerMoveHandler);
+    }
+}
+  for (var i = 0; i < gameButtons.length; i++) {
+    gameButtons[i].addEventListener("click", playerMoveHandler);
+  }
 }
