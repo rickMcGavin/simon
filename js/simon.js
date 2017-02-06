@@ -55,34 +55,45 @@ function moveLooper(count) {
       count++;
       moveLooper(count);
     }
-  }, 750);
+  }, 1000);
+}
+
+
+function playSound(color) {
+  const audio = document.querySelector("."+color);
+  audio.currentTime = 0;
+  audio.play();
 }
 
 function lightUpButton(color) {
   switch(color) {
     case "green":
         greenButton.style.background = greenLightOn;
+        playSound("green");
         setTimeout(function() {
           greenButton.style.background = greenLightOff;
-        }, 500);
+        }, 750);
       break;
     case "red":
         redButton.style.background = redButtonOn;
+        playSound("red");
         setTimeout(function() {
           redButton.style.background = redButtonOff;
-        }, 500);
+        }, 750);
       break;
     case "yellow":
         yellowButton.style.background = yellowButtonOn;
+        playSound("yellow");
         setTimeout(function() {
           yellowButton.style.background = yellowButtonOff;
-        }, 500);
+        }, 750);
       break;
     case "blue":
         blueButton.style.background = blueButtonOn;
+        playSound("blue");
         setTimeout(function() {
         blueButton.style.background = blueButtonOff;
-      }, 500);
+      }, 750);
       break;
   }
 }
@@ -110,7 +121,8 @@ function computerMove() {
   pushComputerMoveToArray(randomNum);
   moveLooper(0);
   makeButtonsClickable();
-  playerMove();
+  // playerMove();
+  computerTurn = false;
   console.log(computerMoves);
 }
 
@@ -169,30 +181,26 @@ strictButton.addEventListener("mouseup", function() {
 });
 
 function checkIfMoveMatches(move) {
-  playerMoves.forEach(function(move, index) {
-    console.log("player array: " + playerMoves);
-    console.log("computer array: " + computerMoves[index]);
-  });
-  // if (computerMoves.length === playerMoves.length) {
-  //   computerMove();
-  // } else {
-  //   playerMove();
-  // }
 
 }
 
 
-function playerMove() {
-  function playerMoveHandler() {
+function playerMoveHandler() {
+  if (!computerTurn) {
     lightUpButton(this.id);
     playerMoves.push(this.id);
-    // checkIfMoveMatches();
-    console.log(playerMoves);
-    for (var i = 0; i < gameButtons.length; i++) {
-      gameButtons[i].removeEventListener("click", playerMoveHandler);
+    checkIfMoveMatches();
+    console.log("player array: " + playerMoves);
+
+    if (playerMoves.length === computerMoves.length) {
+      console.log("same lengths");
+      playerMoves = [];
+      computerTurn = true;
+      setTimeout(computerMove, 1000)
     }
-}
-  for (var i = 0; i < gameButtons.length; i++) {
-    gameButtons[i].addEventListener("click", playerMoveHandler);
   }
+}
+
+for (var i = 0; i < gameButtons.length; i++) {
+  gameButtons[i].addEventListener("click", playerMoveHandler);
 }
