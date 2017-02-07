@@ -5,6 +5,7 @@ var strictButton = document.querySelector(".strict");
 var strictLight = document.querySelector(".led-light");
 var startButton = document.querySelector(".start");
 var display = document.querySelector(".display");
+var match = true;
 
 // game buttons
 var gameButtons = document.getElementsByClassName("game-btn");
@@ -34,12 +35,6 @@ var computerMoves = [];
 var playerMoves = [];
 var computerTurn = true;
 
-
-
-
-
-
-
 function getRandomNumber() {
   return Math.floor(Math.random() * 4);
 }
@@ -49,53 +44,57 @@ function updateDisplay(count) {
 }
 
 function moveLooper(count) {
+  count = count || 0;
   setInterval(function() {
     if (count <= computerMoves.length) {
       lightUpButton(computerMoves[count]);
       count++;
       moveLooper(count);
     }
-  }, 1000);
+  }, 500);
 }
 
 
 function playSound(color) {
-  const audio = document.querySelector("."+color);
+  let audio = document.querySelector("."+color);
   audio.currentTime = 0;
   audio.play();
 }
 
 function lightUpButton(color) {
+  var audioFile;
   switch(color) {
     case "green":
         greenButton.style.background = greenLightOn;
         playSound("green");
         setTimeout(function() {
           greenButton.style.background = greenLightOff;
-        }, 750);
+        }, 250);
       break;
     case "red":
         redButton.style.background = redButtonOn;
         playSound("red");
         setTimeout(function() {
           redButton.style.background = redButtonOff;
-        }, 750);
+        }, 250);
       break;
     case "yellow":
         yellowButton.style.background = yellowButtonOn;
         playSound("yellow");
         setTimeout(function() {
           yellowButton.style.background = yellowButtonOff;
-        }, 750);
+        }, 250);
       break;
     case "blue":
         blueButton.style.background = blueButtonOn;
         playSound("blue");
         setTimeout(function() {
         blueButton.style.background = blueButtonOff;
-      }, 750);
+      }, 250);
       break;
   }
+
+  
 }
 
 function pushComputerMoveToArray(buttonId) {
@@ -121,7 +120,6 @@ function computerMove() {
   pushComputerMoveToArray(randomNum);
   moveLooper(0);
   makeButtonsClickable();
-  // playerMove();
   computerTurn = false;
   console.log(computerMoves);
 }
@@ -180,8 +178,23 @@ strictButton.addEventListener("mouseup", function() {
   }
 });
 
-function checkIfMoveMatches(move) {
-
+function checkIfMoveMatches() {
+  var index = playerMoves.length - 1;
+  if (playerMoves[index] !== computerMoves[index]) {
+    playSound("wrong");
+    match = false;
+    if (strictLight.classList.contains("led-off")) {
+      playerMoves = [];
+      setTimeout(moveLooper, 1500);
+    } 
+    if (strictLight.classList.contains("led-on")) {
+      playerMoves = [];
+      computerMoves = [];
+      setTimeout(computerMove, 1500);
+    }
+  } else {
+    match = true;
+  }
 }
 
 
@@ -190,13 +203,15 @@ function playerMoveHandler() {
     lightUpButton(this.id);
     playerMoves.push(this.id);
     checkIfMoveMatches();
-    console.log("player array: " + playerMoves);
-
-    if (playerMoves.length === computerMoves.length) {
-      console.log("same lengths");
-      playerMoves = [];
-      computerTurn = true;
-      setTimeout(computerMove, 1000)
+    if ((playerMoves.length === computerMoves.length) && (match)) {
+      if (playerMoves.length === 20) {
+        alert("You Win!");
+      } else {
+        console.log("same lengths");
+        playerMoves = [];
+        computerTurn = true;
+       setTimeout(computerMove, 1000)
+      }
     }
   }
 }
