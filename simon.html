@@ -4,19 +4,17 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Simon</title>
-    <link rel="stylesheet" href="css/simon.min.css">
+    <link rel="stylesheet" href="css/simon.css">
   </head>
   <body>
     <div class="game">
-      <div class="inner-game">
-        <div class="top">
-          <div id="green" class="game-btn top-left"></div>
-          <div id="red" class="game-btn top-right"></div>
-        </div>
-        <div class="bottom">
-          <div id="yellow" class="game-btn bottom-left"></div>
-          <div id="blue" class="game-btn bottom-right"></div>
-        </div>
+      <div class="top">
+        <div id="green" class="game-btn top-left"></div>
+        <div id="red" class="game-btn top-right"></div>
+      </div>
+      <div class="bottom">
+        <div id="yellow" class="game-btn bottom-left"></div>
+        <div id="blue" class="game-btn bottom-right"></div>
       </div>
       <div class="middle">
         <h1>Simon</h1>
@@ -47,6 +45,7 @@
     <audio class="yellow" src="https://s3.amazonaws.com/freecodecamp/simonSound3.mp3"></audio>
     <audio class="blue" src="https://s3.amazonaws.com/freecodecamp/simonSound4.mp3"></audio>
     <audio class="wrong" src="sounds/wrong.wav"></audio>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.0.2/howler.core.min.js"></script>
     <script src="js/simon.js" charset="utf-8"></script>
   </body>
 </html>
