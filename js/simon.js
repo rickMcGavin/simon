@@ -43,6 +43,7 @@
   }
 
   function updateDisplay(count) {
+    count = count || computerMoves.length;
     count <= 9 ? display.textContent = "0" + count : display.textContent = count;
   }
 
@@ -149,6 +150,7 @@
     if (playerMoves[index] !== computerMoves[index]) {
       match = false;
       playSound("wrong");
+      updateDisplay("!!");
       toggleClickable();
       if (!strictLight.classList.contains("led-on")) {
         playerMoves = [];
@@ -162,8 +164,17 @@
     } else { 
       match = true;
     }
+    setTimeout(updateDisplay, 1000);
   }
 
+function launchModal() {
+  playSound("won");
+  let modal = document.querySelector(".modal");
+  modal.classList.remove("hidden");
+  let modalH1 = document.querySelector(".modalH1");
+  modalH1.innerText = "You Win!";
+  setTimeout(() => modal.classList.add("hidden"), 5000);
+}
 
   function playerMoveHandler() {
     if (!computerTurn) {
@@ -172,12 +183,12 @@
       checkIfMoveMatches();
       if ((playerMoves.length === computerMoves.length) && (match)) {
         if (playerMoves.length === 20) {
-          alert("You Win!");
+          launchModal();
           reset();
         } else {
           playerMoves = [];
           computerTurn = true;
-         setTimeout(computerMove, 1000)
+         setTimeout(computerMove, 2000)
         }
       }
     }
@@ -188,6 +199,7 @@
     computerMoves = [];
     toggleClickable();
     strictLight.classList.remove("led-on");
+    gameButtons.forEach(button => button.classList.remove("unclickable"));
   }
 
   /////////////////////////////

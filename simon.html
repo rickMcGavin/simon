@@ -7,15 +7,15 @@
     <link rel="stylesheet" href="css/simon.css">
   </head>
   <body>
+
+        <div class="modal hidden"><h1 class="modalH1"></h1></div>
+
     <div class="game">
-      <div class="top">
         <div id="green" class="game-btn top-left"></div>
         <div id="red" class="game-btn top-right"></div>
-      </div>
-      <div class="bottom">
         <div id="yellow" class="game-btn bottom-left"></div>
         <div id="blue" class="game-btn bottom-right"></div>
-      </div>
+      
       <div class="middle">
         <h1>Simon</h1>
         <div class="led-row">
@@ -39,12 +39,14 @@
           <span>ON</span>
         </div>
       </div>
+      
     </div>
     <audio class="green" src="https://s3.amazonaws.com/freecodecamp/simonSound1.mp3"></audio>
     <audio class="red" src="https://s3.amazonaws.com/freecodecamp/simonSound2.mp3"></audio>
     <audio class="yellow" src="https://s3.amazonaws.com/freecodecamp/simonSound3.mp3"></audio>
     <audio class="blue" src="https://s3.amazonaws.com/freecodecamp/simonSound4.mp3"></audio>
     <audio class="wrong" src="sounds/wrong.wav"></audio>
+    <audio class="won" src="sounds/game_won.mp3"></audio>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.0.2/howler.core.min.js"></script>
     <script src="js/simon.js" charset="utf-8"></script>
   </body>

@@ -7,6 +7,10 @@ $led-light-off: #32050C;
 
 @import url('https://fonts.googleapis.com/css?family=Alfa+Slab+One|VT323');
 
+div {
+  box-sizing: border-box;
+}
+
 body {
   background: #eacda3; /* fallback for old browsers */
   background: -webkit-linear-gradient(to left, #eacda3 , #d6ae7b); /* Chrome 10-25, Safari 5.1-6 */
@@ -14,7 +18,9 @@ body {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  justify-content: center;
   align-items: center;
+  margin: 0;
   height: 100vh;
 }
 
@@ -29,6 +35,30 @@ body {
 }
 
 
+.modal {
+  background: rgba(51,51,51,0.9);
+  font-family: 'VT323', monospace;
+  display: flex;
+  justify-content: center;
+  align-items: center;  
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+}
+
+.modal h1 {
+  color: $led-light-on;
+  font-size: 5em;
+}
+
+
+.hidden {
+  display: none;
+}
+
+
+
 /*----------------------------*\
   2. GAME
 \*----------------------------*/
@@ -36,16 +66,12 @@ body {
   background: #333;
   border-radius: 100%;
   box-shadow: 0px 0px 15px rgba(0, 2, 34, 0.6);
+  display: flex;
+  flex-wrap: wrap;
   max-width: 484px;
   max-height: 484px;
   height: 100%;
   width: 100%;
-  margin: 0 auto;
-}
-
-.top,
-.bottom {
-  min-height: 228px;
 }
 
 .top-left,
@@ -53,42 +79,29 @@ body {
 .bottom-left,
 .bottom-right {
   border: 12px solid #333;
-  display: inline-block;
-  min-height: 224px;
-  min-width: 224px;
-  width: 40%;
-  height: 100%;
+  width: 50%;
+  height: 50%;
 }
 
 .top-left {
   background: #00A74A;
   border-top-left-radius: 100%;
-  position: relative;
-  top: 5px;
 }
 
 .top-right {
   background: #9F0F17;
   border-top-right-radius: 100%;
-  position: relative;
-  top: -247px;
-  left: 236px;
   margin: 0;
 }
 
 .bottom-left {
   background: #CCA707;
   border-bottom-left-radius: 100%;
-  position: relative;
-  top: -256px;
 }
 
 .bottom-right {
   background: #094A8F;
   border-bottom-right-radius: 100%;
-  position: relative;
-  top: -508px;
-  left: 236px;
 }
 
 
@@ -104,10 +117,10 @@ body {
   background: #ECE7EE;
   border-radius: 100%;
   position: relative;
-  top: -875px;
-  left: 120px;
-  width: 220px;
-  height: 220px;
+  top: -75%;
+  left: 25%;
+  width: 50%;
+  height: 50%;
   z-index: 1;
 }
 
@@ -128,11 +141,11 @@ body {
 
 .led-light {
   background: $led-light-off;
-  height: 6px;
-  width: 6px;
+  height: 8px;
+  width: 8px;
   border: 2px solid #222;
   border-radius: 100%;
-  margin-right: 11.5%;
+  margin-right: 12.5%;
   margin-bottom: 1%;
 }
 
@@ -149,7 +162,24 @@ body {
 .row {
   display: flex;
   align-items: baseline;
-  justify-content: space-around;
+  justify-content: center;
+}
+
+.row > div,
+.row > span {
+  margin: 0 auto;
+}
+
+.row > span {
+  margin-right: 5%;
+}
+
+.row > span:first-child {
+  margin-right: 4%;
+}
+
+.row > span:nth-child(2) {
+  margin-right: -6%;
 }
 
 .display {
@@ -160,7 +190,7 @@ body {
   color: #430710;
   font-family: 'VT323', monospace;
   font-size: 2em;
-  height: 30px;
+  height: 40px;
   width: 60px;
 }
 
@@ -178,8 +208,8 @@ body {
   box-shadow: 0px 2px 3px #222;
   cursor: pointer;
   display: inline-block;
-  width: 20px;
-  height: 20px;
+  width: 25px;
+  height: 25px;
 }
 
 .btn:last-child {
@@ -191,15 +221,6 @@ body {
   font-family: Arial;
   font-size: .75em;
 }
-
-.row span:first-child {
-  margin-left: 18px;
-}
-
-.row span:nth-child(2) {
-  margin-left: 20px;
-}
-
 
 
 
@@ -222,7 +243,7 @@ body {
 .slot {
   background: #222;
   border-radius: 2px;
-  display: flex;
+  display: flex; 
   margin-top: 10%;
   width: 40px;
   height: 20px;
@@ -233,6 +254,24 @@ body {
   border: 1px solid #222;
   border-radius: 4px;
   cursor: pointer;
-  height: 18px;
+  height: 20px;
   width: 18px;
 }
+
+
+
+
+
+/*----------------------------*\
+  9. MEDIA QUERIES
+\*----------------------------*/
+@media only screen and (max-width: 475px) {
+  .middle h1 {
+    font-size: 2em;
+  }
+
+  .led-light {
+    margin-right: 11%;    
+  }
+}
+
