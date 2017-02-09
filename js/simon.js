@@ -145,10 +145,11 @@
 
 
   function checkIfMoveMatches() {
-    var index = playerMoves.length - 1;
+    let index = playerMoves.length - 1;
     if (playerMoves[index] !== computerMoves[index]) {
       match = false;
       playSound("wrong");
+      toggleClickable();
       if (!strictLight.classList.contains("led-on")) {
         playerMoves = [];
         setTimeout(moveLooper, 1500);
